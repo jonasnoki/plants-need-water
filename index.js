@@ -7,7 +7,7 @@ require('dotenv').config();
     var isWatered = false;
     var chats = [];
 
-    schedule.scheduleJob('0 18 * * *', function (fireDate) {
+    schedule.scheduleJob('0 10 * * *', () => {
         if (!isWatered) {
             chats.forEach(chat => bot.telegram.sendMessage(chat.id, "Gieß doch mal die Pflanzen 🌱 !"))
             console.log("requested watering.")
@@ -20,7 +20,7 @@ require('dotenv').config();
 
     const bot = new Telegraf(process.env.BOT_TOKEN)
     bot.start(async (ctx) => {
-        ctx.reply("Ich werde dich ab jetzt immer um 18:00 daran erinnern deine Pflanzen zu gießen.");
+        ctx.reply("Ich werde dich ab jetzt immer um 10:00 daran erinnern deine Pflanzen zu gießen.");
         let chat = await ctx.getChat();
         chats.push(chat)
         console.log('added chat: ', chat);
